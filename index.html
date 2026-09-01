@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Untuk Lilin 🕯️</title>
+<meta name="description" content="Sebuah tempat kecil yang dibuat khusus untuk Lilin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="bg-photo" aria-hidden="true"></div>
+<div class="bg-overlay" aria-hidden="true"></div>
+<canvas id="petal-canvas" aria-hidden="true"></canvas>
+
+<!-- ============ MUSIC GATE ============ -->
+<div id="music-gate" class="overlay-screen">
+  <div class="gate-card glass">
+    <p class="eyebrow">Sebelum kita mulai...</p>
+    <h2 class="hand-lg">Temani aku dengan sebuah lagu?</h2>
+    <div class="btn-row">
+      <button id="gate-yes" class="btn btn-primary">Boleh 🎵</button>
+      <button id="gate-no" class="btn btn-ghost">Nanti saja</button>
+    </div>
+    <p id="gate-response" class="gate-response" aria-live="polite"></p>
+  </div>
+</div>
+
+<!-- ============ MUSIC PLAYER ============ -->
+<div id="music-player" class="music-player glass" hidden>
+  <audio id="bg-audio" preload="auto" src="assets/musik.mp3"></audio>
+  <button id="mp-toggle" class="mp-toggle" aria-label="Putar atau jeda musik">▶</button>
+  <div class="mp-info">
+    <p id="mp-title" class="mp-title">Sebuah Lagu Untukmu</p>
+    <p id="mp-artist" class="mp-artist"></p>
+  </div>
+  <button id="mp-mute" class="mp-icon-btn" aria-label="Bisukan musik">🔊</button>
+  <input id="mp-volume" class="mp-volume" type="range" min="0" max="100" value="60" aria-label="Volume musik">
+</div>
+
+<main id="story">
+
+  <!-- ============ HERO ============ -->
+  <section id="hero" class="section hero-section">
+    <div class="hero-visual">
+      <img src="assets/teddy.jpg" alt="" class="hero-teddy" id="hero-teddy-img">
+    </div>
+    <div class="hero-text">
+      <p class="reveal-line" data-delay="0">Hai, <span class="name-fill"></span>...</p>
+      <p class="reveal-line" data-delay="1">Selamat datang.</p>
+      <p class="reveal-line" data-delay="2">Aku membuat tempat kecil ini...</p>
+      <p class="reveal-line hand" data-delay="3">khusus untukmu.</p>
+      <p class="reveal-line small" data-delay="4">Tenang.</p>
+      <p class="reveal-line small" data-delay="5">Ini bukan sesuatu yang berat.</p>
+      <p class="reveal-line small" data-delay="6">Tapi ini penting buatku.</p>
+      <p class="reveal-line" data-delay="7">Kalau kamu punya waktu sebentar, mau menjelajahinya bersamaku?</p>
+      <div class="btn-row reveal-line" data-delay="8">
+        <button class="btn btn-primary" id="hero-go">Ayo 🕯️</button>
+        <button class="btn btn-ghost" id="hero-curious">Aku penasaran 👀</button>
+      </div>
+      <p id="hero-curious-response" class="gate-response" aria-live="polite"></p>
+    </div>
+    <div class="scroll-hint">turun perlahan ↓</div>
+  </section>
+
+  <!-- ============ CHAPTER 1 ============ -->
+  <section id="ch1" class="section chapter">
+    <p class="chapter-number">satu</p>
+    <h2 class="chapter-title">Lilin, sebelum kita mulai...</h2>
+    <p class="chapter-body reveal-up">Aku ingin bilang satu hal dulu, sebelum kita lanjut ke halaman berikutnya.</p>
+    <p class="chapter-body reveal-up">Tidak ada yang perlu kamu siapkan di sini. Baca ini pelan-pelan, kapan pun kamu punya waktu dan hati yang tenang.</p>
+    <p class="chapter-body reveal-up">Ada beberapa hal yang sudah lama ingin aku katakan, tapi belum pernah menemukan cara yang tepat.</p>
+    <p class="chapter-body reveal-up">Jadi aku membuat tempat kecil ini — supaya kata-kata itu akhirnya punya rumah.</p>
+  </section>
+
+  <!-- ============ CHAPTER 2 — playful interlude ============ -->
+  <section id="ch2" class="section chapter">
+    <p class="chapter-number">dua</p>
+    <h2 class="chapter-title">Sedikit bermain dulu</h2>
+    <p class="chapter-body reveal-up">Sebelum masuk ke bagian yang lebih dalam, mari main-main sebentar dulu.</p>
+
+    <div class="easter-egg-row">
+      <div class="egg-card glass" id="teddy-egg">
+        <img src="assets/playful.jpg" alt="Teddy bear" class="egg-teddy" id="teddy-egg-img">
+        <p class="egg-hint">coba klik teddy ini beberapa kali</p>
+        <p class="egg-response" id="teddy-egg-response" aria-live="polite"></p>
+      </div>
+
+      <div class="egg-card glass" id="flower-egg">
+        <button class="flower-btn" id="flower-btn" aria-label="Bunga">🌸</button>
+        <p class="egg-hint">atau bunga ini, buat kamu</p>
+        <p class="egg-response" id="flower-egg-response" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="moving-button-wrap">
+      <p class="chapter-body reveal-up">Dan ini — coba kalau berani.</p>
+      <button id="moving-btn" class="btn btn-dodge">Jangan klik ini.</button>
+      <p class="egg-response" id="moving-btn-response" aria-live="polite"></p>
+    </div>
+
+    <div class="game-block">
+      <p class="chapter-body reveal-up">Masih mau main? Coba tangkap kelopak yang jatuh ini.</p>
+      <div class="petal-game glass" id="petal-game">
+        <div class="petal-game-hud">
+          <span>Tertangkap: <b id="petal-score">0</b> / 10</span>
+          <button class="btn btn-ghost btn-sm" id="petal-restart">Ulangi</button>
+        </div>
+        <div class="petal-game-field" id="petal-field" role="group" aria-label="Area permainan menangkap kelopak"></div>
+        <p class="egg-response" id="petal-game-message" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="game-block">
+      <p class="chapter-body reveal-up">Atau ini — cari pasangan kartunya.</p>
+      <div class="memory-game glass" id="memory-game">
+        <div class="memory-grid" id="memory-grid"></div>
+        <p class="egg-response" id="memory-message" aria-live="polite"></p>
+        <button class="btn btn-ghost btn-sm" id="memory-restart">Acak ulang</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 3 — hidden quotes ============ -->
+  <section id="ch3" class="section chapter">
+    <p class="chapter-number">tiga</p>
+    <h2 class="chapter-title">Kalau kamu mau mencari...</h2>
+    <p class="chapter-body reveal-up">Ada beberapa kalimat kecil yang sengaja kusembunyikan di sepanjang tempat ini.</p>
+    <p class="chapter-body reveal-up">Tidak semuanya penting. Tapi mungkin kamu akan menemukan sesuatu yang ingin kukatakan tapi belum sempat.</p>
+    <div class="hidden-quote-grid">
+      <button class="quote-pebble" data-quote="0">•</button>
+      <button class="quote-pebble" data-quote="1">•</button>
+      <button class="quote-pebble" data-quote="2">•</button>
+    </div>
+    <p class="quote-display" id="quote-display" aria-live="polite"></p>
+  </section>
+
+  <!-- ============ CHAPTER 4 — night / reflection ============ -->
+  <section id="ch4" class="section chapter night">
+    <div class="star-sky" id="star-sky"></div>
+    <div class="moon" id="moon-egg" role="button" tabindex="0" aria-label="Bulan">🌙</div>
+    <p class="egg-response" id="moon-egg-response" aria-live="polite"></p>
+
+    <p class="chapter-number">empat</p>
+    <h2 class="chapter-title">Tentang nyala kecil di malam gelap</h2>
+
+    <div class="star-question glass">
+      <p class="chapter-body">Kalau malam ini kamu boleh memilih satu cahaya, cahaya mana yang akan kamu pilih?</p>
+      <div class="star-choices">
+        <button class="btn btn-ghost" data-star="bright">⭐ Yang paling terang</button>
+        <button class="btn btn-ghost" data-star="closest">⭐ Yang paling dekat</button>
+        <button class="btn btn-ghost" data-star="faint">🕯️ Yang kecil tapi hangat</button>
+      </div>
+      <p class="star-answer" id="star-answer" aria-live="polite"></p>
+    </div>
+
+    <div class="star-question glass" id="star-count-block">
+      <p class="chapter-body">Menurutmu, seberapa jauh cahaya lilin kecil bisa terlihat dalam gelap?</p>
+      <div class="star-choices">
+        <button class="btn btn-ghost" data-count="100">Sejauh ruangan itu</button>
+        <button class="btn btn-ghost" data-count="1000">Sejauh mata memandang</button>
+        <button class="btn btn-ghost" data-count="infinite">Lebih jauh dari yang disadari pemiliknya</button>
+      </div>
+      <p class="star-answer" id="star-count-answer" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 5 — the apology ============ -->
+  <section id="ch5" class="section chapter">
+    <p class="chapter-number">lima</p>
+    <h2 class="chapter-title">Ada yang ingin aku minta maaf</h2>
+    <div class="quote-cascade">
+      <p class="quote-line reveal-up">Lilin, aku tidak akan berputar-putar. Aku ingin langsung mengatakan ini.</p>
+      <p class="quote-line reveal-up">Beberapa waktu lalu, salah satu temanku menuduhmu — bilang kamu dekat denganku cuma untuk main-main, cuma untuk memanfaatkan sesuatu dariku.</p>
+      <p class="quote-line reveal-up">Aku tahu itu tidak benar. Aku tahu itu sama sekali bukan siapa kamu.</p>
+      <p class="quote-line reveal-up">Tapi tetap saja, tuduhan itu keluar dari orang di sekitarku — dan aku merasa ikut bertanggung jawab karena tidak bisa menjagamu dari omongan seperti itu.</p>
+    </div>
+
+    <div class="letter glass" style="margin-top:2rem;">
+      <p class="chapter-title small-title" style="margin-bottom:1rem;">Permintaan maaf ini, untukmu</p>
+      <p>Lilin, maafkan aku.</p>
+      <p>Maaf karena kamu harus mendengar tuduhan yang sama sekali tidak pantas kamu terima.</p>
+      <p>Maaf karena aku tidak berdiri lebih cepat, lebih tegas, untuk membelamu saat itu juga.</p>
+      <p>Kamu tidak pernah memintaku untuk apa pun. Kamu bahkan tidak pernah membuatku merasa harus memberimu sesuatu supaya kamu tetap ada.</p>
+      <p>Kamu ada, dengan caramu yang tulus, tanpa embel-embel, tanpa maksud tersembunyi apa pun.</p>
+      <p>Dan justru karena itu, tuduhan itu terasa jauh lebih menyakitkan — karena yang dituduhkan adalah kebalikan total dari siapa kamu sebenarnya.</p>
+      <p>Aku tahu permintaan maaf ini tidak bisa menghapus rasa sakit yang mungkin sempat kamu simpan diam-diam.</p>
+      <p>Tapi aku ingin kamu dengar ini langsung dariku, sejelas-jelasnya: aku percaya penuh sama kamu. Aku tidak pernah, sedetik pun, meragukan ketulusanmu.</p>
+      <p>Dan aku minta maaf, sungguh-sungguh minta maaf, karena kamu harus melalui itu karena orang-orang di sekitarku yang tidak mengenalmu sebaik aku mengenalmu.</p>
+      <p class="letter-close">Kalau ada air mata yang jatuh karena omongan itu, aku ingin kamu tahu — aku turut merasakannya, dan aku menyesal itu pernah terjadi padamu.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 6 — the letter: why she's special ============ -->
+  <section id="ch6" class="section chapter">
+    <p class="chapter-number">enam</p>
+    <h2 class="chapter-title">Dan ada satu hal lagi yang ingin kukatakan</h2>
+
+    <div class="envelope-wrap">
+      <div class="envelope" id="envelope">
+        <div class="envelope-back"></div>
+        <div class="envelope-flap"></div>
+        <div class="envelope-front"></div>
+        <div class="envelope-seal">✉</div>
+      </div>
+      <button class="btn btn-primary" id="open-envelope">Buka</button>
+    </div>
+
+    <div class="letter glass" id="letter" hidden>
+      <p>Lilin.</p>
+      <p>Ada sesuatu yang selalu ingin kukatakan, tapi rasanya selalu kalah oleh waktu, oleh kesibukan, oleh rasa canggung yang tidak perlu.</p>
+      <p>Jadi biar aku katakan sekarang, di sini, sejelas mungkin.</p>
+      <p>Kamu adalah salah satu orang paling istimewa yang pernah aku kenal — dan bukan karena kamu berusaha terlihat begitu.</p>
+      <p>Bagiku, kamu itu nyaris sempurna. Cara kamu berpikir, cara kamu memperlakukan orang lain, cara kamu menjalani harimu — semuanya terasa begitu utuh.</p>
+      <p>Tapi yang membuatku benar-benar kagum bukan itu.</p>
+      <p>Yang membuatku kagum adalah: dengan segala kelebihan yang kamu punya, kamu tidak pernah sekalipun memandang dirimu lebih tinggi dariku.</p>
+      <p>Kamu memandangku setara. Kamu duduk semeja denganku seolah kita berdiri di tanah yang sama tingginya — padahal kamu punya seribu alasan untuk merasa lebih.</p>
+      <p>Aku pernah bertemu orang-orang yang, begitu merasa punya lebih, mulai memandang orang lain dari atas. Kamu tidak begitu. Tidak sedikit pun.</p>
+      <p>Dan itu — kerendahan hati yang tidak dibuat-buat, yang tumbuh natural dari dalam dirimu — itu yang membuatmu istimewa, jauh lebih dari sekadar kesempurnaan yang kelihatan di luar.</p>
+      <p>Orang bisa terlihat sempurna. Tapi tidak banyak orang sempurna yang tetap memilih rendah hati saat tidak ada yang mengharuskannya.</p>
+      <p>Kamu salah satu dari sedikit itu. Dan aku beruntung bisa mengenalmu, bisa duduk sejajar denganmu, bukan karena kamu menurunkan dirimu — tapi karena kamu memang selalu melihat semua orang dengan cara yang sama.</p>
+      <p>Terima kasih sudah menjadi dirimu sendiri, tanpa perlu berubah untuk terlihat lebih hebat dari siapa pun.</p>
+      <p class="letter-close">Terima kasih, Lilin — untuk setiap kali kamu memilih memandangku setara, padahal kamu tidak pernah harus melakukan itu.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 7 — climax ============ -->
+  <section id="ch7" class="section chapter climax">
+    <p class="chapter-body reveal-up">Lilin...</p>
+    <p class="chapter-body reveal-up">Ini sebenarnya alasan kenapa tempat kecil ini dibuat.</p>
+    <p class="chapter-body reveal-up">Bukan untuk merayakan sesuatu, tapi untuk menyampaikan dua hal yang sudah lama tertahan: maaf, dan terima kasih.</p>
+    <h1 class="climax-title reveal-up">MAAF, DAN TERIMA KASIH.</h1>
+    <p class="chapter-body reveal-up hand-lg">Untukmu, <span class="name-fill"></span>.</p>
+    <div class="climax-wishes">
+      <p class="quote-line reveal-up">Maaf karena pernah ada saat kamu diragukan, padahal kamu tidak pernah melakukan kesalahan apa pun.</p>
+      <p class="quote-line reveal-up">Terima kasih karena tetap menjadi dirimu sendiri — hangat, rendah hati, dan tulus — bahkan ketika dunia di sekitarmu tidak selalu adil.</p>
+      <p class="quote-line reveal-up">Semoga tidak ada lagi tuduhan yang salah alamat yang harus kamu tanggung karena kedekatanmu denganku.</p>
+      <p class="quote-line reveal-up">Semoga kamu selalu dikelilingi orang-orang yang bisa melihat ketulusanmu sejelas aku melihatnya.</p>
+      <p class="quote-line reveal-up hand">You are more than enough, exactly as you are.</p>
+      <p class="quote-line reveal-up">Dan kalau suatu hari kamu ragu lagi soal nilaimu sendiri — kembalilah ke halaman ini. Baca ulang. Ingat bahwa ada yang melihatmu dengan sangat jelas.</p>
+      <p class="quote-line reveal-up hand-lg">Terima kasih sudah menjadi Lilin yang selalu memandang semua orang setara.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 8 — hidden message ============ -->
+  <section id="ch8" class="section chapter quiet">
+    <p class="chapter-number">delapan</p>
+    <h2 class="chapter-title">Sebuah pesan kecil yang mungkin tidak perlu dijawab</h2>
+
+    <div class="quote-cascade">
+      <p class="quote-line reveal-up">Kalau nanti kamu bertanya, kenapa ada seseorang yang mau membuat semua ini untukmu...</p>
+      <p class="quote-line reveal-up">mungkin jawabannya sederhana.</p>
+      <p class="quote-line reveal-up">Karena kamu layak mendengar permintaan maaf yang tulus, bukan sekadar "maaf" yang diucapkan cepat lalu dilupakan.</p>
+      <p class="quote-line reveal-up">Dan karena kamu layak tahu, sejelas-jelasnya, bahwa ada orang yang melihat kebaikanmu — bukan cuma sekilas, tapi benar-benar memperhatikannya.</p>
+      <p class="quote-line reveal-up">Di antara begitu banyak orang yang bisa memilih untuk merasa lebih tinggi ketika mereka punya alasan untuk itu, kamu memilih untuk tetap sejajar denganku.</p>
+      <p class="quote-line reveal-up">Itu bukan hal kecil. Itu jauh lebih berarti dari yang mungkin pernah kamu sadari.</p>
+      <p class="quote-line reveal-up hand">Dan hari ini, aku hanya ingin mengatakan satu hal: maaf, terima kasih, dan kamu istimewa — tiga kata yang sudah terlalu lama tertahan.</p>
+    </div>
+
+    <div class="hidden-name-block glass">
+      <p class="chapter-title small-title">Ada satu hal kecil...</p>
+      <p class="quote-line reveal-up">Sebenarnya, ada satu hal kecil yang belum pernah aku ucapkan langsung.</p>
+      <p class="quote-line reveal-up hand">Terima kasih sudah percaya sama aku, sekalipun ada yang mencoba membuatmu ragu.</p>
+      <p class="quote-line reveal-up">Aku tidak akan biarkan tuduhan seperti itu terulang lagi. Dan aku akan lebih cepat membelamu, sejak awal, kapan pun itu diperlukan.</p>
+      <p class="quote-line reveal-up">Jadi kalau suatu hari kamu ragu lagi soal apa yang orang katakan tentangmu — jangan ragu.</p>
+      <p class="quote-line reveal-up hand">N & L. Maaf yang tulus, dan terima kasih yang lebih tulus lagi.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 9 — final ============ -->
+  <section id="ch9" class="section chapter final-chapter">
+    <p class="chapter-number">sembilan</p>
+    <h2 class="chapter-title">Sampai jumpa di halaman berikutnya</h2>
+    <div class="quote-cascade">
+      <p class="quote-line reveal-up">Kalau suatu hari kamu lupa tentang website kecil ini, tentang semua kata yang pernah tertulis di sini...</p>
+      <p class="quote-line reveal-up">tidak apa-apa.</p>
+      <p class="quote-line reveal-up">Karena mungkin, memang bukan itu yang ingin aku tinggalkan.</p>
+      <p class="quote-line reveal-up hand">Aku hanya berharap, kapan pun kamu meragukan dirimu sendiri, kamu ingat — ada seseorang yang pernah melihatmu dengan sangat jelas, dan sangat menyesal pernah membiarkanmu diragukan.</p>
+      <p class="quote-line reveal-up hand-lg">Maaf. Dan terima kasih. Selalu.</p>
+    </div>
+    <p class="final-line reveal-up">Di antara semua orang yang pernah kutemui, caramu memandang semua orang setara adalah salah satu hal paling berharga yang pernah kulihat.</p>
+    <p class="final-line hand-lg reveal-up">Terima kasih sudah menjadi Lilin.</p>
+
+    <div class="final-screen">
+      <p class="teddy-emoji">🕯️</p>
+      <p class="quote-line">Made with a little thought.</p>
+      <p class="quote-line">And a lot of sincerity.</p>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="restart-btn">Mulai lagi</button>
+        <button class="btn btn-ghost" id="stay-btn">Tinggal sebentar</button>
+      </div>
+      <p class="gate-response" id="stay-response" aria-live="polite"></p>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/config.js"></script>
+<script src="assets/script.js"></script>
+</body>
+</html>
